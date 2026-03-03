@@ -8,7 +8,7 @@ const AppHeader = () => (
       </div>
       <h1 className="text-2xl font-bold text-foreground">InterSystems Mutual</h1>
     </div>
-    <p className="mb-8 text-muted-foreground">Life Insurance ($5M) Application</p>
+    <p className="mb-8 text-muted-foreground">Supplemental Benefits Claim Portal</p>
   </>
 );
 
