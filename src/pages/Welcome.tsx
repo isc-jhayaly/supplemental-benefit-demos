@@ -16,22 +16,17 @@ const Welcome = () => {
         </div>
 
         <h2 className="mt-8 text-xl font-semibold text-foreground">
-          Would you like to check your supplemental benefits data?
+          Submit a Supplemental Health Benefits Claim
         </h2>
 
-        <div className="mt-8 flex w-full gap-4">
-          <Button variant="outline" size="lg" className="flex-1 text-sm font-medium">
-            No
-          </Button>
-          <Button
-            variant="consent"
-            size="lg"
-            className="flex-1 text-sm font-medium"
-            onClick={() => navigate("/consent")}
-          >
-            Yes
-          </Button>
-        </div>
+        <Button
+          variant="consent"
+          size="lg"
+          className="mt-8 w-full text-sm font-medium"
+          onClick={() => navigate("/consent")}
+        >
+          Continue
+        </Button>
       </div>
     </div>
   );
