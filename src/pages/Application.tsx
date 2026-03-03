@@ -16,8 +16,8 @@ interface BenefitTile {
 }
 
 const benefits: BenefitTile[] = [
-  { title: "Cancer Diagnosis", icon: <FileText className="h-5 w-5 text-primary" /> },
-  { title: "Overnight Hospital Stay", icon: <Shield className="h-5 w-5 text-primary" /> },
+  { title: "Cancer Diagnosis (Critical Illness Benefit)", icon: <FileText className="h-5 w-5 text-primary" /> },
+  { title: "Overnight Hospital Stay (Hospital Indemnity Benefit)", icon: <Shield className="h-5 w-5 text-primary" /> },
 ];
 
 const Application = () => {
@@ -34,10 +34,7 @@ const Application = () => {
               <CheckCircle className="h-5 w-5 text-emerald-500" />
             </div>
             <div>
-              <h3 className="text-base font-bold text-foreground">We Identified</h3>
-              <p className="text-sm text-muted-foreground">
-                The following events may qualify for supplemental benefits
-              </p>
+              <h3 className="text-base font-bold text-foreground">Identified Potential Supplemental Benefit Events</h3>
             </div>
           </div>
         </div>
