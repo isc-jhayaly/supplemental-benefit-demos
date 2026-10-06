@@ -16,9 +16,9 @@ const ClaimSummaryCard = ({ variant = "dark", status = "Pending Review", claim }
   return (
     <div className={`rounded-xl border p-6 ${isDark ? "border-[#004470] bg-[#01345e]" : "border-[#d1d5db] bg-white"}`}>
       <div className="flex items-center gap-2 mb-4">
-        <FileText className={`h-5 w-5 ${isDark ? "text-[#00a6d7]" : "text-[#015294]"}`} />
+        <FileText className={`h-5 w-5 ${isDark ? "text-[#fac832]" : "text-[#015294]"}`} />
         <h2 className={`text-base font-bold ${value}`}>Claim Summary</h2>
-        <span className={`ml-auto rounded-full px-3 py-0.5 text-xs font-semibold ${isDark ? "bg-[#00a6d7]/15 text-[#00a6d7]" : "bg-[#00a6d7]/15 text-[#037cb7]"}`}>
+        <span className={`ml-auto rounded-full px-3 py-0.5 text-xs font-semibold ${isDark ? "bg-[#fac832]/15 text-[#fac832]" : "bg-[#fac832]/15 text-[#b8960a]"}`}>
           {status}
         </span>
       </div>
@@ -67,7 +67,7 @@ const ClaimSummaryCard = ({ variant = "dark", status = "Pending Review", claim }
         </div>
         <div>
           <p className={`text-xs ${label}`}>Estimated Benefit</p>
-          <p className="font-medium text-[#00a6d7]">{claim.estimatedBenefit}</p>
+          <p className="font-medium text-[#fac832]">{claim.estimatedBenefit}</p>
         </div>
       </div>
     </div>

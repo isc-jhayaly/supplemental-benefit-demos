@@ -17,17 +17,17 @@ const NttHandoff = () => {
       {/* Hero */}
       <div className="relative flex-1 flex items-center justify-center overflow-hidden py-12">
         <div className="absolute inset-0 bg-gradient-to-br from-[#015294] via-[#004470] to-[#3273af]" />
-        <div className="absolute top-1/4 left-1/4 h-64 w-64 rounded-full bg-[#00a6d7]/8 blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/3 h-48 w-48 rounded-full bg-[#00a6d7]/5 blur-3xl" />
+        <div className="absolute top-1/4 left-1/4 h-64 w-64 rounded-full bg-[#fac832]/8 blur-3xl" />
+        <div className="absolute bottom-1/4 right-1/3 h-48 w-48 rounded-full bg-[#fac832]/5 blur-3xl" />
 
         <div className="relative z-10 mx-auto max-w-2xl w-full px-6">
           <div className="text-center mb-8">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#00a6d7]">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#fac832]">
               Supplemental Benefits Claim
             </p>
             <h1 className="text-3xl font-bold leading-tight text-white sm:text-4xl">
               Unum has received your claim and requests your{" "}
-              <span className="text-[#00a6d7]">medical records</span>.
+              <span className="text-[#fac832]">medical records</span>.
             </h1>
             <p className="mt-4 text-base text-gray-300">
               To process your supplemental benefits claim, we need to securely
@@ -41,7 +41,7 @@ const NttHandoff = () => {
           <div className="text-center mt-8">
             <button
               onClick={() => navigate(`/demo/${scenario}/consent`)}
-              className="inline-flex items-center gap-2 rounded bg-[#00a6d7] px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-sky-500/10 hover:bg-[#0090c7] transition-colors"
+              className="inline-flex items-center gap-2 rounded bg-[#fac832] px-8 py-3.5 text-base font-semibold text-[#015294] shadow-lg shadow-amber-500/10 hover:bg-[#e0b42d] transition-colors"
             >
               Continue to record auto-retrieval
               <ArrowRight className="h-5 w-5" />
