@@ -23,7 +23,7 @@ const Welcome = () => {
           <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary">
             <Shield className="h-5 w-5 text-primary-foreground" />
           </div>
-          <h1 className="text-2xl font-bold text-foreground">InterSystems Mutual</h1>
+          <h1 className="text-2xl font-bold text-foreground">Unum</h1>
         </div>
 
         <h2 className="mt-8 text-xl font-semibold text-foreground">

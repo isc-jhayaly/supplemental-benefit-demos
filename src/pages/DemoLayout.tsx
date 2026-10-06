@@ -69,7 +69,7 @@ const DemoLayout = () => {
   }, [scenario, searchParams, currentPatient, demoScenario, returnUrl, navigate, setCurrentPatient, setClinicalData, setDemoScenario, setReturnUrl]);
 
   return (
-    <div className="min-h-screen flex flex-col" style={{ fontFamily: "'Noto Sans', sans-serif" }}>
+    <div className="min-h-screen flex flex-col" style={{ fontFamily: "'Open Sans', sans-serif" }}>
       <NttHeader />
       <Outlet />
     </div>

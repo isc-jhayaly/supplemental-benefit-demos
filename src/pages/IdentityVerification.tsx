@@ -174,7 +174,7 @@ const IdentityVerification = () => {
                 />
                 {/* Scan line */}
                 <div
-                  className="absolute left-0 w-full h-1 bg-[#E6B600] shadow-[0_0_12px_2px_rgba(230,182,0,0.5)]"
+                  className="absolute left-0 w-full h-1 bg-[#00a6d7] shadow-[0_0_12px_2px_rgba(0,166,215,0.5)]"
                   style={{
                     animation: "scanDown 1.8s ease-in-out infinite",
                   }}
@@ -246,7 +246,7 @@ const IdentityVerification = () => {
             <div className="relative w-full max-w-lg rounded-xl border-[3px] border-primary bg-accent/40 p-6 overflow-hidden">
               {/* Scan line overlay */}
               <div
-                className="absolute left-0 w-full h-0.5 bg-[#E6B600] shadow-[0_0_12px_2px_rgba(230,182,0,0.5)] z-10"
+                className="absolute left-0 w-full h-0.5 bg-[#00a6d7] shadow-[0_0_12px_2px_rgba(0,166,215,0.5)] z-10"
                 style={{ animation: "scanDown 2s ease-in-out infinite" }}
               />
               <style>{`
@@ -380,7 +380,7 @@ const IdentityVerification = () => {
             <Button
               variant="default"
               size="lg"
-              className="w-full text-sm font-medium bg-[#E6B600] text-[#070F26] hover:bg-[#d4a800]"
+              className="w-full text-sm font-medium bg-[#00a6d7] text-white hover:bg-[#0090c7]"
               onClick={() => navigate("../record-retrieval")}
             >
               Continue to Record Retrieval

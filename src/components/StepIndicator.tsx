@@ -25,7 +25,7 @@ const StepIndicator = ({ steps, currentStep, completedSteps = [] }: StepIndicato
                 isCompleted
                   ? "border-emerald-500 bg-emerald-500 text-primary-foreground"
                   : isCurrent
-                  ? "border-[#070F26] bg-[#070F26] text-white"
+                  ? "border-[#015294] bg-[#015294] text-white"
                   : "border-border bg-card text-muted-foreground"
               }`}
             >
