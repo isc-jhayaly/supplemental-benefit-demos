@@ -1,27 +1,29 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Camera, CheckCircle, Loader2, Smartphone } from "lucide-react";
 import StepIndicator from "@/components/StepIndicator";
-import AppHeader from "@/components/AppHeader";
+import ClearLogoAnimated from "@/components/ClearLogoAnimated";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { usePatient } from "@/context/PatientContext";
 
 const steps = [
   { number: 1, label: "Consent" },
   { number: 2, label: "Identity Verification" },
   { number: 3, label: "Record Retrieval" },
-  { number: 4, label: "Application" },
 ];
 
 type VerificationPhase =
   | "intro"
   | "selfie"
   | "photo-captured"
-  | "id-scan"
+  | "id-prompt"
+  | "id-scanning"
   | "verifying"
   | "verified";
 
 const IdentityVerification = () => {
   const navigate = useNavigate();
+  const { currentPatient } = usePatient();
   const [phase, setPhase] = useState<VerificationPhase>("intro");
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -58,19 +60,29 @@ const IdentityVerification = () => {
     };
   }, [phase, startCamera, stopCamera]);
 
-  // Auto-advance from photo-captured → id-scan after 2s
+  // Auto-advance from photo-captured → id-prompt after scan animation
   useEffect(() => {
     if (phase === "photo-captured") {
-      const t = setTimeout(() => setPhase("id-scan"), 2500);
+      const t = setTimeout(() => setPhase("id-prompt"), 3000);
       return () => clearTimeout(t);
     }
   }, [phase]);
 
-  // Auto-advance from id-scan → verifying after 3.5s
+  // Auto-advance from id-scanning → verifying after details fill in
+  const [scanReveal, setScanReveal] = useState(0);
   useEffect(() => {
-    if (phase === "id-scan") {
-      const t = setTimeout(() => setPhase("verifying"), 3500);
-      return () => clearTimeout(t);
+    if (phase === "id-scanning") {
+      const steps = [500, 1000, 1500, 2000, 2500];
+      const timers = steps.map((ms, i) =>
+        setTimeout(() => setScanReveal(i + 1), ms)
+      );
+      const done = setTimeout(() => setPhase("verifying"), 3500);
+      return () => {
+        timers.forEach(clearTimeout);
+        clearTimeout(done);
+      };
+    } else {
+      setScanReveal(0);
     }
   }, [phase]);
 
@@ -99,8 +111,7 @@ const IdentityVerification = () => {
   };
 
   return (
-    <div className="flex min-h-screen flex-col items-center bg-background px-4 py-10">
-      <AppHeader />
+    <div className="flex flex-1 flex-col items-center bg-background px-4 py-10">
       <StepIndicator steps={steps} currentStep={2} completedSteps={[1]} />
 
       <div className="mt-8 w-full max-w-2xl rounded-xl border border-border bg-card p-6 md:p-8 shadow-sm">
@@ -151,85 +162,145 @@ const IdentityVerification = () => {
           </div>
         )}
 
-        {/* PHOTO CAPTURED PHASE */}
+        {/* PHOTO CAPTURED PHASE — vertical scan */}
         {phase === "photo-captured" && (
           <div className="flex flex-col items-center gap-6 py-8">
             {capturedPhoto && (
-              <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-primary">
+              <div className="relative w-48 h-48 rounded-2xl overflow-hidden border-4 border-primary">
                 <img
                   src={capturedPhoto}
                   alt="Captured selfie"
                   className="h-full w-full object-cover"
                 />
+                {/* Scan line */}
+                <div
+                  className="absolute left-0 w-full h-1 bg-[#E6B600] shadow-[0_0_12px_2px_rgba(230,182,0,0.5)]"
+                  style={{
+                    animation: "scanDown 1.8s ease-in-out infinite",
+                  }}
+                />
+                <style>{`
+                  @keyframes scanDown {
+                    0%, 100% { top: 0; }
+                    50% { top: calc(100% - 4px); }
+                  }
+                `}</style>
               </div>
             )}
             <h3 className="text-lg font-bold text-foreground">
-              Photo Captured!
+              Analyzing Photo...
             </h3>
             <p className="text-sm text-muted-foreground -mt-4">
-              Processing your image...
+              Scanning biometric features
             </p>
-            <div className="h-1.5 w-48 rounded-full bg-muted overflow-hidden">
-              <div className="h-full bg-primary rounded-full animate-pulse w-3/4" />
-            </div>
           </div>
         )}
 
-        {/* ID SCAN PHASE */}
-        {phase === "id-scan" && (
+        {/* ID PROMPT PHASE — blank license + scan button */}
+        {phase === "id-prompt" && (
           <div className="flex flex-col items-center gap-6 py-4">
-            <div className="w-full max-w-lg rounded-xl border-[3px] border-primary bg-accent/40 p-6">
-              {/* Driver License Card */}
+            <div className="w-full max-w-lg rounded-xl border-[3px] border-dashed border-border bg-muted/20 p-6">
               <div className="flex justify-between items-start mb-4">
                 <div>
-                  <p className="text-xs font-bold text-primary tracking-wide">
-                    STATE OF CT
-                  </p>
-                  <h3 className="text-xl font-bold text-foreground">
-                    DRIVER LICENSE
-                  </h3>
+                  <p className="text-xs font-bold text-muted-foreground tracking-wide">STATE OF CT</p>
+                  <h3 className="text-xl font-bold text-muted-foreground/50">DRIVER LICENSE</h3>
                 </div>
                 <div className="text-right">
+                  <p className="text-xs font-semibold text-muted-foreground">DL</p>
+                  <p className="text-sm font-semibold text-muted-foreground/40">--------</p>
+                </div>
+              </div>
+              <div className="flex gap-5">
+                <div className="w-28 h-36 rounded border border-dashed border-border bg-muted/40 flex items-center justify-center shrink-0">
+                  <Camera className="h-8 w-8 text-muted-foreground/40" />
+                </div>
+                <div className="flex flex-col gap-2 text-sm flex-1">
+                  <div className="h-4 w-3/4 rounded bg-muted/60" />
+                  <div className="h-4 w-2/3 rounded bg-muted/60" />
+                  <div className="h-4 w-1/2 rounded bg-muted/60" />
+                  <div className="h-4 w-1/2 rounded bg-muted/60" />
+                  <div className="h-4 w-2/3 rounded bg-muted/60" />
+                </div>
+              </div>
+            </div>
+
+            <h3 className="text-lg font-bold text-foreground">Scan Your ID</h3>
+            <p className="text-sm text-muted-foreground -mt-4">
+              Position your driver's license in front of the camera
+            </p>
+            <Button
+              variant="default"
+              size="lg"
+              className="text-sm font-medium"
+              onClick={() => setPhase("id-scanning")}
+            >
+              <Camera className="mr-2 h-4 w-4" />
+              Scan license with camera
+            </Button>
+          </div>
+        )}
+
+        {/* ID SCANNING PHASE — details fill in progressively */}
+        {phase === "id-scanning" && (
+          <div className="flex flex-col items-center gap-6 py-4">
+            <div className="relative w-full max-w-lg rounded-xl border-[3px] border-primary bg-accent/40 p-6 overflow-hidden">
+              {/* Scan line overlay */}
+              <div
+                className="absolute left-0 w-full h-0.5 bg-[#E6B600] shadow-[0_0_12px_2px_rgba(230,182,0,0.5)] z-10"
+                style={{ animation: "scanDown 2s ease-in-out infinite" }}
+              />
+              <style>{`
+                @keyframes scanDown {
+                  0%, 100% { top: 0; }
+                  50% { top: calc(100% - 4px); }
+                }
+              `}</style>
+
+              {/* Header — always visible */}
+              <div className="flex justify-between items-start mb-4">
+                <div>
+                  <p className="text-xs font-bold text-primary tracking-wide">STATE OF CT</p>
+                  <h3 className="text-xl font-bold text-foreground">DRIVER LICENSE</h3>
+                </div>
+                <div className={`text-right transition-opacity duration-500 ${scanReveal >= 1 ? "opacity-100" : "opacity-0"}`}>
                   <p className="text-xs font-semibold text-primary">DL</p>
-                  <p className="text-sm font-semibold text-foreground">
-                    D1234567
-                  </p>
+                  <p className="text-sm font-semibold text-foreground">D1234567</p>
                 </div>
               </div>
 
               <div className="flex gap-5">
-                {/* Photo */}
+                {/* Photo — reveals at step 1 */}
                 <div className="w-28 h-36 rounded border border-border bg-muted/60 overflow-hidden shrink-0">
-                  {capturedPhoto ? (
-                    <img
-                      src={capturedPhoto}
-                      alt="License photo"
-                      className="h-full w-full object-cover"
-                    />
-                  ) : (
-                    <div className="flex items-center justify-center h-full text-xs text-muted-foreground">
-                      Photo
-                    </div>
-                  )}
+                  <div className={`h-full w-full transition-opacity duration-700 ${scanReveal >= 1 ? "opacity-100" : "opacity-0"}`}>
+                    {capturedPhoto ? (
+                      <img src={capturedPhoto} alt="License photo" className="h-full w-full object-cover" />
+                    ) : (
+                      <div className="flex items-center justify-center h-full text-xs text-muted-foreground">Photo</div>
+                    )}
+                  </div>
                 </div>
 
-                {/* Details */}
+                {/* Details — reveal progressively */}
                 <div className="flex flex-col gap-1 text-sm">
-                  <p className="font-semibold text-foreground">LN SMITH</p>
-                  <p className="font-semibold text-foreground">FN JOHN</p>
-                  <p className="text-primary">
+                  <p className={`font-semibold text-foreground transition-opacity duration-500 ${scanReveal >= 2 ? "opacity-100" : "opacity-0"}`}>
+                    LN {currentPatient?.lastName ?? "SMITH"}
+                  </p>
+                  <p className={`font-semibold text-foreground transition-opacity duration-500 ${scanReveal >= 2 ? "opacity-100" : "opacity-0"}`}>
+                    FN {currentPatient?.firstName ?? "JOHN"}
+                  </p>
+                  <p className={`text-primary transition-opacity duration-500 ${scanReveal >= 3 ? "opacity-100" : "opacity-0"}`}>
                     <span className="font-semibold">DOB:</span>{" "}
                     <span className="text-foreground">01/15/1975</span>
                   </p>
-                  <p className="text-primary">
+                  <p className={`text-primary transition-opacity duration-500 ${scanReveal >= 3 ? "opacity-100" : "opacity-0"}`}>
                     <span className="font-semibold">EXP:</span>{" "}
                     <span className="text-foreground">01/15/2028</span>
                   </p>
-                  <p className="text-primary">
+                  <p className={`text-primary transition-opacity duration-500 ${scanReveal >= 4 ? "opacity-100" : "opacity-0"}`}>
                     <span className="font-semibold">ISS:</span>{" "}
                     <span className="text-foreground">01/15/2024</span>
                   </p>
-                  <div className="mt-1 text-muted-foreground text-xs">
+                  <div className={`mt-1 text-muted-foreground text-xs transition-opacity duration-500 ${scanReveal >= 4 ? "opacity-100" : "opacity-0"}`}>
                     <p>2936 State Avenue</p>
                     <p>Manchester, CT 06040</p>
                   </div>
@@ -238,7 +309,7 @@ const IdentityVerification = () => {
 
               <hr className="my-3 border-border" />
 
-              <div className="flex items-end justify-between text-xs">
+              <div className={`flex items-end justify-between text-xs transition-opacity duration-500 ${scanReveal >= 5 ? "opacity-100" : "opacity-0"}`}>
                 <div className="flex gap-8">
                   <div>
                     <p className="text-primary font-semibold">SEX: <span className="text-foreground">M</span></p>
@@ -257,25 +328,20 @@ const IdentityVerification = () => {
 
             <h3 className="text-lg font-bold text-foreground">Scanning ID...</h3>
             <p className="text-sm text-muted-foreground -mt-4">
-              Verifying document authenticity
+              Extracting document details
             </p>
           </div>
         )}
 
         {/* VERIFYING PHASE */}
         {phase === "verifying" && (
-          <div className="flex flex-col items-center gap-6 py-12">
-            <div className="flex h-20 w-20 items-center justify-center rounded-full bg-accent">
-              <Loader2 className="h-10 w-10 text-primary animate-spin" />
-            </div>
-            <div className="text-center">
+          <div className="flex flex-col items-center gap-4 py-10">
+            <ClearLogoAnimated />
+            <div className="text-center mt-2">
               <h3 className="text-xl font-bold text-foreground">Verifying Your Identity</h3>
               <p className="mt-1 text-sm text-muted-foreground">
                 Please wait while we verify your documents...
               </p>
-            </div>
-            <div className="h-1.5 w-48 rounded-full bg-muted overflow-hidden">
-              <div className="h-full bg-primary rounded-full animate-pulse w-3/4" />
             </div>
           </div>
         )}
@@ -314,10 +380,10 @@ const IdentityVerification = () => {
             <Button
               variant="default"
               size="lg"
-              className="w-full text-sm font-medium bg-emerald-500 hover:bg-emerald-600"
-              onClick={() => navigate("/record-retrieval")}
+              className="w-full text-sm font-medium bg-[#E6B600] text-[#070F26] hover:bg-[#d4a800]"
+              onClick={() => navigate("../record-retrieval")}
             >
-              Continue Application
+              Continue to Record Retrieval
             </Button>
           </div>
         )}

@@ -1,7 +1,11 @@
 import { CheckCircle, Shield, Sparkles, FileText } from "lucide-react";
+import { useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import StepIndicator from "@/components/StepIndicator";
 import AppHeader from "@/components/AppHeader";
 import { Button } from "@/components/ui/button";
+import { usePatient } from "@/context/PatientContext";
+import { postToUrl } from "@/lib/utils";
 
 const steps = [
   { number: 1, label: "Consent" },
@@ -21,6 +25,30 @@ const benefits: BenefitTile[] = [
 ];
 
 const Application = () => {
+  const navigate = useNavigate();
+  const { clinicalData, returnUrl } = usePatient();
+  const [submitted, setSubmitted] = useState(false);
+
+  const assessment = useMemo(() => {
+    if (!clinicalData) return { planOffer: null };
+    const problems = clinicalData.problems || [];
+    const hasCardio = problems.some((p: any) => (p.problem?.description || "").toLowerCase().includes("cardiac"));
+    const hasCancer = problems.some((p: any) => (p.problem?.description || "").toLowerCase().includes("cancer"));
+    if (hasCancer) return { planOffer: "Decline" };
+    if (hasCardio) return { planOffer: "LimitedOffer" };
+    return { planOffer: "StandardOffer" };
+  }, [clinicalData]);
+
+  const submit = () => {
+    setSubmitted(true);
+    if (returnUrl) {
+      postToUrl(returnUrl, { clinicalData, assessment });
+      return;
+    }
+
+    setTimeout(() => navigate("/"), 1500);
+  };
+
   return (
     <div className="flex min-h-screen flex-col items-center bg-background px-4 py-10">
       <AppHeader />
@@ -60,6 +88,15 @@ const Application = () => {
             </Button>
           </div>
         ))}
+
+        <div className="rounded-xl border border-border bg-card p-6">
+          <h4 className="text-sm font-semibold">Assessment</h4>
+          <p className="text-sm text-muted-foreground">Plan Recommendation: {assessment.planOffer ?? "—"}</p>
+        </div>
+
+        <Button variant="default" size="lg" className="w-full text-sm font-medium" onClick={submit}>
+          {submitted ? "Submitting…" : "Submit Application"}
+        </Button>
       </div>
     </div>
   );

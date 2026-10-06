@@ -25,14 +25,14 @@ const StepIndicator = ({ steps, currentStep, completedSteps = [] }: StepIndicato
                 isCompleted
                   ? "border-emerald-500 bg-emerald-500 text-primary-foreground"
                   : isCurrent
-                  ? "border-primary bg-primary text-primary-foreground"
+                  ? "border-[#070F26] bg-[#070F26] text-white"
                   : "border-border bg-card text-muted-foreground"
               }`}
             >
               {isCompleted ? <Check className="h-5 w-5" /> : step.number}
             </div>
             <span
-              className={`text-xs font-medium ${
+              className={`text-center text-xs font-medium ${
                 isCurrent || isCompleted ? "text-foreground" : "text-muted-foreground"
               }`}
             >

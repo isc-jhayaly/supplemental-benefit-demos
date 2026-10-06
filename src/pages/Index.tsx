@@ -4,13 +4,11 @@ import { Shield, Lock, FileText, Info } from "lucide-react";
 import StepIndicator from "@/components/StepIndicator";
 import ConsentItem from "@/components/ConsentItem";
 import { Button } from "@/components/ui/button";
-import AppHeader from "@/components/AppHeader";
 
 const steps = [
   { number: 1, label: "Consent" },
   { number: 2, label: "Identity Verification" },
   { number: 3, label: "Record Retrieval" },
-  { number: 4, label: "Application" },
 ];
 
 const Index = () => {
@@ -22,8 +20,7 @@ const Index = () => {
     setConsents((prev) => prev.map((v, idx) => (idx === i ? !v : v)));
 
   return (
-    <div className="flex min-h-screen flex-col items-center bg-background px-4 py-10">
-      <AppHeader />
+    <div className="flex flex-1 flex-col items-center bg-background px-4 py-10">
       <StepIndicator steps={steps} currentStep={1} />
 
       <div className="mt-8 w-full max-w-2xl rounded-xl border border-border bg-card p-6 md:p-8 shadow-sm">
@@ -78,7 +75,7 @@ const Index = () => {
           size="lg"
           className="mt-6 w-full text-sm font-medium"
           disabled={!allChecked}
-          onClick={() => navigate("/identity-verification")}
+          onClick={() => navigate("../identity-verification")}
         >
           Continue to Identity Verification
         </Button>

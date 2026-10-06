@@ -64,6 +64,10 @@ This project is built with:
 
 Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
 
+If you want to deploy this demo to a fixed host, the app is configured to run from the root path. For example:
+
+- `http://54.86.68.166/`
+
 ## Can I connect a custom domain to my Lovable project?
 
 Yes, you can!

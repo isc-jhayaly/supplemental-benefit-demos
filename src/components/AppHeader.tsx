@@ -1,14 +1,11 @@
-import { Shield } from "lucide-react";
-
 const AppHeader = () => (
   <>
     <div className="mb-2 flex items-center gap-3">
-      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary">
-        <Shield className="h-5 w-5 text-primary-foreground" />
-      </div>
-      <h1 className="text-2xl font-bold text-foreground">InterSystems Mutual</h1>
+      <img src="/ntt-logo-white.png" alt="NTT DATA" className="h-5 brightness-0" />
     </div>
-    <p className="mb-8 text-muted-foreground">Supplemental Benefits Claim Portal</p>
+    <p className="mb-8 text-[#393939]" style={{ fontFamily: "'Noto Sans', sans-serif" }}>
+      Supplemental Benefits Claim Portal
+    </p>
   </>
 );
 
