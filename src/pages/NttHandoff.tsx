@@ -15,28 +15,24 @@ const NttHandoff = () => {
       <NttHeader />
 
       {/* Hero */}
-      <div className="relative flex-1 flex items-center justify-center overflow-hidden py-12">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#015294] via-[#004470] to-[#3273af]" />
-        <div className="absolute top-1/4 left-1/4 h-64 w-64 rounded-full bg-[#fac832]/8 blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/3 h-48 w-48 rounded-full bg-[#fac832]/5 blur-3xl" />
-
-        <div className="relative z-10 mx-auto max-w-2xl w-full px-6">
+      <div className="flex-1 flex items-center justify-center py-12 bg-[#e8f1f8]">
+        <div className="mx-auto max-w-2xl w-full px-6">
           <div className="text-center mb-8">
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#fac832]">
               Supplemental Benefits Claim
             </p>
-            <h1 className="text-3xl font-bold leading-tight text-white sm:text-4xl">
+            <h1 className="text-3xl font-bold leading-tight text-[#015294] sm:text-4xl">
               Unum has received your claim and requests your{" "}
               <span className="text-[#fac832]">medical records</span>.
             </h1>
-            <p className="mt-4 text-base text-gray-300">
+            <p className="mt-4 text-base text-[#555]">
               To process your supplemental benefits claim, we need to securely
               retrieve your health records. Your data is protected and handled
               in compliance with HIPAA regulations.
             </p>
           </div>
 
-          <ClaimSummaryCard variant="dark" claim={claim} />
+          <ClaimSummaryCard variant="light" claim={claim} />
 
           <div className="text-center mt-8">
             <button
