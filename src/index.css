@@ -101,9 +101,14 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
-    font-family: 'Lato', Verdana, sans-serif;
+    @apply bg-background;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #000;
+    font-family: lato, Verdana !important;
+    font-size: 1pc;
     font-weight: 300;
+    line-height: 24px;
     text-rendering: optimizeLegibility;
   }
 }
