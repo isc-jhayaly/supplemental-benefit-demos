@@ -265,7 +265,7 @@ const RecordRetrieval = () => {
               <Button
                 variant="default"
                 size="lg"
-                className="w-full text-sm font-medium bg-[#E6B600] text-[#070F26] hover:bg-[#d4a800]"
+                className="w-full text-sm font-medium bg-[#009688] text-white hover:bg-[#00796b]"
                 onClick={() => {
                   if (returnUrl) {
                     returnToCaller();
