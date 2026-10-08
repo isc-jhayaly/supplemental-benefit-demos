@@ -11,7 +11,7 @@ const NttHandoff = () => {
   const claim = claimDataByScenario[(scenario as DemoScenarioKey) ?? "complex-exception"];
 
   return (
-    <div className="min-h-screen bg-white flex flex-col" style={{ fontFamily: "'Lato', Verdana, sans-serif" }}>
+    <div className="min-h-screen bg-white flex flex-col">
       <NttHeader />
 
       {/* Hero — white background with black/purple accents */}

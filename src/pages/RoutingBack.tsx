@@ -10,7 +10,7 @@ const RoutingBack = () => {
   const claim = claimDataByScenario[(demoScenario as DemoScenarioKey) ?? "complex-exception"];
 
   return (
-    <div className="min-h-screen bg-[#f8f9fa] flex flex-col" style={{ fontFamily: "'Lato', Verdana, sans-serif" }}>
+    <div className="min-h-screen bg-[#f8f9fa] flex flex-col">
       <NttHeader />
       <div className="flex-1 flex flex-col items-center px-4 py-12">
         <div className="flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100 mb-5">
