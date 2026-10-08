@@ -104,11 +104,11 @@ All colors MUST be HSL.
     @apply bg-background;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    color: #000;
+    color: #222;
     font-family: lato, Verdana !important;
-    font-size: 1pc;
-    font-weight: 300;
-    line-height: 24px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.6;
     text-rendering: optimizeLegibility;
   }
 }
