@@ -10,21 +10,21 @@ const RoutingBack = () => {
   const claim = claimDataByScenario[(demoScenario as DemoScenarioKey) ?? "complex-exception"];
 
   return (
-    <div className="min-h-screen bg-[#f8f9fa] flex flex-col" style={{ fontFamily: "'Noto Sans', sans-serif" }}>
+    <div className="min-h-screen bg-[#f8f9fa] flex flex-col" style={{ fontFamily: "'Source Sans Pro', Helvetica, sans-serif" }}>
       <NttHeader />
       <div className="flex-1 flex flex-col items-center px-4 py-12">
         <div className="flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100 mb-5">
           <CheckCircle className="h-8 w-8 text-emerald-500" />
         </div>
-        <h1 className="text-2xl font-bold text-[#070F26] mb-2 text-center">
-          Your medical records have been sent to InterSystems Mutual.
+        <h1 className="text-2xl font-bold text-[#0758ac] mb-2 text-center">
+          Your medical records have been sent to Ameritas.
         </h1>
         <p className="text-[#393939] text-sm mb-8 text-center max-w-lg">
-          Review your submitted claim below.
+          Review your submitted application information below.
         </p>
 
         <div className="w-full max-w-2xl">
-          <ClaimSummaryCard variant="light" status="Records Submitted" claim={claim} />
+          <ClaimSummaryCard variant="light" status="Records Received" claim={claim} />
         </div>
       </div>
     </div>

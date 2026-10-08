@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { Shield, CheckCircle, AlertTriangle, Search, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import AmeritasLogo from "@/components/AmeritasLogo";
 import { patients } from "@/data/patients";
 import { usePatient } from "@/context/PatientContext";
 import { demoScenarios } from "@/data/demoScenarios";
@@ -19,15 +20,12 @@ const Welcome = () => {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-background px-4">
       <div className="flex flex-col items-center text-center max-w-lg w-full">
-        <div className="mb-4 flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary">
-            <Shield className="h-5 w-5 text-primary-foreground" />
-          </div>
-          <h1 className="text-2xl font-bold text-foreground">InterSystems Mutual</h1>
+        <div className="mb-4">
+          <AmeritasLogo variant="color" className="h-10" />
         </div>
 
         <h2 className="mt-8 text-xl font-semibold text-foreground">
-          Submit a Supplemental Health Benefits Claim
+          Submit a Life Insurance Application
         </h2>
         <p className="mt-2 text-sm text-muted-foreground">
           Select a demo scenario to begin

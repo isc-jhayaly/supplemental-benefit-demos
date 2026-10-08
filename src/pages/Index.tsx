@@ -33,7 +33,7 @@ const Index = () => {
           <ConsentItem
             icon={<Shield className="h-5 w-5" />}
             title="Data Sharing Consent"
-            description="I consent for InterSystems Mutual to retrieve my electronic health records with authorized healthcare providers through secure national networks."
+            description="I consent for Ameritas to retrieve my electronic health records with authorized healthcare providers through secure national networks."
             checked={consents[0]}
             onToggle={() => toggle(0)}
           />
