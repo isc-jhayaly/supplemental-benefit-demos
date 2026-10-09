@@ -27,7 +27,7 @@ const Welcome = () => {
         </div>
 
         <h2 className="mt-8 text-xl font-semibold text-foreground">
-          Submit a Supplemental Health Benefits Claim
+          Submit a Life Insurance Application
         </h2>
         <p className="mt-2 text-sm text-muted-foreground">
           Select a demo scenario to begin

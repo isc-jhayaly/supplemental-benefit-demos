@@ -20,14 +20,14 @@ const NttHandoff = () => {
           <div className="text-center mb-8">
             <div className="w-16 h-1 bg-[#009688] mb-6 mx-auto rounded-full" />
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#009688]">
-              Supplemental Benefits Claim
+              Life Insurance Application
             </p>
             <h1 className="text-3xl font-bold leading-tight text-[#000080] sm:text-4xl">
-              InterSystems Mutual has received your claim and requests your{" "}
-              <span className="text-[#009688]">medical records</span>.
+              InterSystems Mutual has received your life insurance application and requests your{" "}
+              <span className="text-[#009688]">medical record</span>.
             </h1>
             <p className="mt-4 text-base text-[#555]">
-              To process your supplemental benefits claim, we need to securely
+              To process your life insurance application, we need to securely
               retrieve your health records. Your data is protected and handled
               in compliance with HIPAA regulations.
             </p>

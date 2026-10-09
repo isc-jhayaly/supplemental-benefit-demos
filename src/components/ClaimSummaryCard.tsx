@@ -1,4 +1,4 @@
-import { FileText, Calendar, User, Heart, DollarSign } from "lucide-react";
+import { FileText, Calendar, User, Users, Hash } from "lucide-react";
 import type { ClaimInfo } from "@/data/claimData";
 
 interface ClaimSummaryCardProps {
@@ -17,7 +17,7 @@ const ClaimSummaryCard = ({ variant = "dark", status = "Pending Review", claim }
     <div className={`rounded-xl border p-6 ${isDark ? "border-[#000066] bg-[#00004d]" : "border-[#d1d5db] bg-white"}`}>
       <div className="flex items-center gap-2 mb-4">
         <FileText className={`h-5 w-5 ${isDark ? "text-[#009688]" : "text-[#000080]"}`} />
-        <h2 className={`text-base font-bold ${value}`}>Claim Summary</h2>
+        <h2 className={`text-base font-bold ${value}`}>Application Summary</h2>
         <span className={`ml-auto rounded-full px-3 py-0.5 text-xs font-semibold ${isDark ? "bg-[#009688]/15 text-[#009688]" : "bg-[#009688]/15 text-[#007c6e]"}`}>
           {status}
         </span>
@@ -27,47 +27,40 @@ const ClaimSummaryCard = ({ variant = "dark", status = "Pending Review", claim }
         <div className="flex items-start gap-3">
           <User className={`h-4 w-4 mt-0.5 shrink-0 ${icon}`} />
           <div>
-            <p className={`text-xs ${label}`}>Claimant</p>
+            <p className={`text-xs ${label}`}>Applicant</p>
             <p className={`text-sm font-medium ${value}`}>{claim.claimant}</p>
           </div>
         </div>
         <div className="flex items-start gap-3">
           <Calendar className={`h-4 w-4 mt-0.5 shrink-0 ${icon}`} />
           <div>
-            <p className={`text-xs ${label}`}>Date of Incident</p>
-            <p className={`text-sm font-medium ${value}`}>{claim.dateOfIncident}</p>
+            <p className={`text-xs ${label}`}>Age</p>
+            <p className={`text-sm font-medium ${value}`}>{claim.age}</p>
           </div>
         </div>
         <div className="flex items-start gap-3">
-          <Heart className={`h-4 w-4 mt-0.5 shrink-0 ${icon}`} />
+          <Users className={`h-4 w-4 mt-0.5 shrink-0 ${icon}`} />
           <div>
-            <p className={`text-xs ${label}`}>Primary Diagnosis</p>
-            <p className={`text-sm font-medium ${value}`}>{claim.diagnosis}</p>
+            <p className={`text-xs ${label}`}>Gender</p>
+            <p className={`text-sm font-medium ${value}`}>{claim.gender}</p>
           </div>
         </div>
         <div className="flex items-start gap-3">
-          <DollarSign className={`h-4 w-4 mt-0.5 shrink-0 ${icon}`} />
+          <Calendar className={`h-4 w-4 mt-0.5 shrink-0 ${icon}`} />
           <div>
-            <p className={`text-xs ${label}`}>Benefit Type</p>
-            <p className={`text-sm font-medium ${value}`}>{claim.benefitType}</p>
+            <p className={`text-xs ${label}`}>Application Date</p>
+            <p className={`text-sm font-medium ${value}`}>{claim.applicationDate}</p>
           </div>
         </div>
       </div>
 
       <hr className={`my-4 ${isDark ? "border-[#000066]" : "border-[#e5e7eb]"}`} />
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
+      <div className="flex items-start gap-3">
+        <Hash className={`h-4 w-4 mt-0.5 shrink-0 ${icon}`} />
         <div>
-          <p className={`text-xs ${label}`}>Policy Number</p>
-          <p className={`font-medium ${value}`}>{claim.policyNumber}</p>
-        </div>
-        <div>
-          <p className={`text-xs ${label}`}>Claim Filed</p>
-          <p className={`font-medium ${value}`}>{claim.claimFiled}</p>
-        </div>
-        <div>
-          <p className={`text-xs ${label}`}>Estimated Benefit</p>
-          <p className="font-medium text-[#009688]">{claim.estimatedBenefit}</p>
+          <p className={`text-xs ${label}`}>Application ID</p>
+          <p className={`text-sm font-medium ${value}`}>{claim.applicationId}</p>
         </div>
       </div>
     </div>

@@ -17,10 +17,10 @@ const RoutingBack = () => {
           <CheckCircle className="h-8 w-8 text-emerald-500" />
         </div>
         <h1 className="text-2xl font-bold text-[#000080] mb-2 text-center">
-          Your medical records have been sent to InterSystems Mutual.
+          Your medical records have been sent to InterSystems Mutual for your life insurance application.
         </h1>
         <p className="text-[#393939] text-sm mb-8 text-center max-w-lg">
-          Review your submitted claim below.
+          Review your submitted application below.
         </p>
 
         <div className="w-full max-w-2xl">
