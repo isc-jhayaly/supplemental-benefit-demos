@@ -1,22 +1,22 @@
 const dotRings = [
-  // Outer ring — 18 dots
-  ...[0, 20, 40, 60, 80, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 300, 320, 340].map((angle, i) => ({
+  // Outer ring — 10 dots, "C" gap initially at 180° (left), settles at 0° (right) after 180° spin
+  ...[225, 255, 285, 315, 345, 15, 45, 75, 105, 135].map((angle, i) => ({
     cx: 50 + 38 * Math.cos((angle * Math.PI) / 180),
     cy: 50 + 38 * Math.sin((angle * Math.PI) / 180),
     r: 4.0,
     ring: 0,
     index: i,
   })),
-  // Middle ring — 12 dots
-  ...[15, 45, 75, 105, 135, 165, 195, 225, 255, 285, 315, 345].map((angle, i) => ({
+  // Middle ring — 10 dots, offset 15° for alternating flower pattern
+  ...[180, 210, 240, 270, 300, 330, 0, 30, 60, 90].map((angle, i) => ({
     cx: 50 + 26 * Math.cos((angle * Math.PI) / 180),
     cy: 50 + 26 * Math.sin((angle * Math.PI) / 180),
     r: 3.0,
     ring: 1,
     index: i,
   })),
-  // Inner ring — 6 dots
-  ...[0, 60, 120, 180, 240, 300].map((angle, i) => ({
+  // Inner ring — 10 dots, aligned with outer ring
+  ...[285, 315, 345, 15, 45, 75, 105, 135, 165, 195].map((angle, i) => ({
     cx: 50 + 15 * Math.cos((angle * Math.PI) / 180),
     cy: 50 + 15 * Math.sin((angle * Math.PI) / 180),
     r: 2.2,
