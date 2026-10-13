@@ -27,12 +27,12 @@ const dotRings = [
 
 const ClearLogoAnimated = () => (
   <div className="flex flex-col items-center gap-6">
-    <div className="relative w-28 h-28">
+    <div className="relative w-28 h-28 clear-breathe">
       <svg viewBox="0 0 100 100" className="w-full h-full">
         <style>{`
           @keyframes spinRing0 {
             from { transform: rotate(0deg); }
-            to   { transform: rotate(360deg); }
+            to   { transform: rotate(540deg); }
           }
           @keyframes spinRing1 {
             from { transform: rotate(0deg); }
@@ -42,14 +42,28 @@ const ClearLogoAnimated = () => (
             from { transform: rotate(0deg); }
             to   { transform: rotate(360deg); }
           }
-          @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.7; }
-            50%      { transform: scale(1.15); opacity: 1; }
+          @keyframes breathe {
+            0%   { transform: scale(1); }
+            50%  { transform: scale(1.12); }
+            100% { transform: scale(1); }
           }
-          .ring0 { animation: spinRing0 6s linear infinite; transform-origin: 50px 50px; }
-          .ring1 { animation: spinRing1 4s linear infinite; transform-origin: 50px 50px; }
-          .ring2 { animation: spinRing2 3s linear infinite; transform-origin: 50px 50px; }
-          .dot   { animation: pulse 2s ease-in-out infinite; transform-origin: center; }
+          .ring0 {
+            animation: spinRing0 2.5s ease-out forwards;
+            transform-origin: 50px 50px;
+          }
+          .ring1 {
+            animation: spinRing1 2s ease-out forwards;
+            transform-origin: 50px 50px;
+          }
+          .ring2 {
+            animation: spinRing2 1.8s ease-out forwards;
+            transform-origin: 50px 50px;
+          }
+          .clear-breathe {
+            animation: breathe 0.8s ease-in-out 1;
+            animation-delay: 2.6s;
+            animation-fill-mode: both;
+          }
         `}</style>
 
         <g className="ring0">
@@ -60,8 +74,6 @@ const ClearLogoAnimated = () => (
               cy={d.cy}
               r={d.r}
               fill="#1a1a1a"
-              className="dot"
-              style={{ animationDelay: `${i * 0.1}s` }}
             />
           ))}
         </g>
@@ -73,8 +85,6 @@ const ClearLogoAnimated = () => (
               cy={d.cy}
               r={d.r}
               fill="#1a1a1a"
-              className="dot"
-              style={{ animationDelay: `${i * 0.15}s` }}
             />
           ))}
         </g>
@@ -86,8 +96,6 @@ const ClearLogoAnimated = () => (
               cy={d.cy}
               r={d.r}
               fill="#1a1a1a"
-              className="dot"
-              style={{ animationDelay: `${i * 0.2}s` }}
             />
           ))}
         </g>
