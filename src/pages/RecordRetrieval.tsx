@@ -274,7 +274,7 @@ const RecordRetrieval = () => {
                   navigate("/routing-back");
                 }}
               >
-                Continue to Application
+                Review Application
               </Button>
             </div>
           </>
