@@ -1,25 +1,25 @@
 const dotRings = [
-  // Outer ring — 12 dots
-  ...[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map((angle, i) => ({
+  // Outer ring — 18 dots
+  ...[0, 20, 40, 60, 80, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 300, 320, 340].map((angle, i) => ({
     cx: 50 + 38 * Math.cos((angle * Math.PI) / 180),
     cy: 50 + 38 * Math.sin((angle * Math.PI) / 180),
-    r: 4.2,
+    r: 4.0,
     ring: 0,
     index: i,
   })),
-  // Middle ring — 8 dots
-  ...[22, 67, 112, 157, 202, 247, 292, 337].map((angle, i) => ({
+  // Middle ring — 12 dots
+  ...[15, 45, 75, 105, 135, 165, 195, 225, 255, 285, 315, 345].map((angle, i) => ({
     cx: 50 + 26 * Math.cos((angle * Math.PI) / 180),
     cy: 50 + 26 * Math.sin((angle * Math.PI) / 180),
-    r: 3.2,
+    r: 3.0,
     ring: 1,
     index: i,
   })),
-  // Inner ring — 5 dots
-  ...[0, 72, 144, 216, 288].map((angle, i) => ({
+  // Inner ring — 6 dots
+  ...[0, 60, 120, 180, 240, 300].map((angle, i) => ({
     cx: 50 + 15 * Math.cos((angle * Math.PI) / 180),
     cy: 50 + 15 * Math.sin((angle * Math.PI) / 180),
-    r: 2.5,
+    r: 2.2,
     ring: 2,
     index: i,
   })),
@@ -32,36 +32,36 @@ const ClearLogoAnimated = () => (
         <style>{`
           @keyframes spinRing0 {
             from { transform: rotate(0deg); }
-            to   { transform: rotate(540deg); }
+            to   { transform: rotate(180deg); }
           }
           @keyframes spinRing1 {
             from { transform: rotate(0deg); }
-            to   { transform: rotate(-360deg); }
+            to   { transform: rotate(-150deg); }
           }
           @keyframes spinRing2 {
             from { transform: rotate(0deg); }
-            to   { transform: rotate(360deg); }
+            to   { transform: rotate(120deg); }
           }
           @keyframes breathe {
             0%   { transform: scale(1); }
-            50%  { transform: scale(1.12); }
+            50%  { transform: scale(1.2); }
             100% { transform: scale(1); }
           }
           .ring0 {
-            animation: spinRing0 2.5s ease-out forwards;
+            animation: spinRing0 5s ease-out forwards;
             transform-origin: 50px 50px;
           }
           .ring1 {
-            animation: spinRing1 2s ease-out forwards;
+            animation: spinRing1 4.5s ease-out forwards;
             transform-origin: 50px 50px;
           }
           .ring2 {
-            animation: spinRing2 1.8s ease-out forwards;
+            animation: spinRing2 4s ease-out forwards;
             transform-origin: 50px 50px;
           }
           .clear-breathe {
-            animation: breathe 0.8s ease-in-out 1;
-            animation-delay: 2.6s;
+            animation: breathe 1.2s ease-in-out 1;
+            animation-delay: 4s;
             animation-fill-mode: both;
           }
         `}</style>
