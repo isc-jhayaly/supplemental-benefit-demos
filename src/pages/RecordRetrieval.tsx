@@ -274,7 +274,7 @@ const RecordRetrieval = () => {
                   navigate("/routing-back");
                 }}
               >
-                Continue to Application
+                Review Claim Submission
               </Button>
             </div>
           </>
