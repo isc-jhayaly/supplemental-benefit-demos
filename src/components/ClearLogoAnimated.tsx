@@ -1,14 +1,14 @@
 const dotRings = [
-  // Outer ring — 10 dots, "C" gap initially at 180° (left), settles at 0° (right) after 180° spin
-  ...[225, 255, 285, 315, 345, 15, 45, 75, 105, 135].map((angle, i) => ({
+  // Outer ring — 10 dots, full 360° at 36° intervals
+  ...[0, 36, 72, 108, 144, 180, 216, 252, 288, 324].map((angle, i) => ({
     cx: 50 + 38 * Math.cos((angle * Math.PI) / 180),
     cy: 50 + 38 * Math.sin((angle * Math.PI) / 180),
     r: 4.0,
     ring: 0,
     index: i,
   })),
-  // Middle ring — 10 dots, offset 15° for alternating flower pattern
-  ...[180, 210, 240, 270, 300, 330, 0, 30, 60, 90].map((angle, i) => ({
+  // Middle ring — 10 dots, starts aligned, spins to 18° offset for flower pattern
+  ...[0, 36, 72, 108, 144, 180, 216, 252, 288, 324].map((angle, i) => ({
     cx: 50 + 26 * Math.cos((angle * Math.PI) / 180),
     cy: 50 + 26 * Math.sin((angle * Math.PI) / 180),
     r: 3.0,
@@ -16,7 +16,7 @@ const dotRings = [
     index: i,
   })),
   // Inner ring — 10 dots, aligned with outer ring
-  ...[285, 315, 345, 15, 45, 75, 105, 135, 165, 195].map((angle, i) => ({
+  ...[0, 36, 72, 108, 144, 180, 216, 252, 288, 324].map((angle, i) => ({
     cx: 50 + 15 * Math.cos((angle * Math.PI) / 180),
     cy: 50 + 15 * Math.sin((angle * Math.PI) / 180),
     r: 2.2,
@@ -36,11 +36,11 @@ const ClearLogoAnimated = () => (
           }
           @keyframes spinRing1 {
             from { transform: rotate(0deg); }
-            to   { transform: rotate(-150deg); }
+            to   { transform: rotate(-162deg); }
           }
           @keyframes spinRing2 {
             from { transform: rotate(0deg); }
-            to   { transform: rotate(120deg); }
+            to   { transform: rotate(144deg); }
           }
           @keyframes breathe {
             0%   { transform: scale(1); }
