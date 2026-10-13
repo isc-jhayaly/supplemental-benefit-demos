@@ -17,10 +17,10 @@ const RoutingBack = () => {
           <CheckCircle className="h-8 w-8 text-emerald-500" />
         </div>
         <h1 className="text-2xl font-bold text-[#0758ac] mb-2 text-center">
-          Your medical records have been sent to Ameritas.
+          Thank you! Your medical records have been sent to Ameritas.
         </h1>
         <p className="text-[#393939] text-sm mb-8 text-center max-w-lg">
-          Review your submitted application information below.
+          Our underwriting team will review your application and follow up with you within 5 business days. Review your submitted application information below.
         </p>
 
         <div className="w-full max-w-2xl">
