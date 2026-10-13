@@ -1,25 +1,25 @@
 const dotRings = [
-  // Outer ring — 12 dots
-  ...[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map((angle, i) => ({
+  // Outer ring — 10 dots, full 360° at 36° intervals
+  ...[0, 36, 72, 108, 144, 180, 216, 252, 288, 324].map((angle, i) => ({
     cx: 50 + 38 * Math.cos((angle * Math.PI) / 180),
     cy: 50 + 38 * Math.sin((angle * Math.PI) / 180),
-    r: 4.2,
+    r: 4.0,
     ring: 0,
     index: i,
   })),
-  // Middle ring — 8 dots
-  ...[22, 67, 112, 157, 202, 247, 292, 337].map((angle, i) => ({
+  // Middle ring — 10 dots, starts aligned, spins to 18° offset for flower pattern
+  ...[0, 36, 72, 108, 144, 180, 216, 252, 288, 324].map((angle, i) => ({
     cx: 50 + 26 * Math.cos((angle * Math.PI) / 180),
     cy: 50 + 26 * Math.sin((angle * Math.PI) / 180),
-    r: 3.2,
+    r: 3.0,
     ring: 1,
     index: i,
   })),
-  // Inner ring — 5 dots
-  ...[0, 72, 144, 216, 288].map((angle, i) => ({
+  // Inner ring — 10 dots, aligned with outer ring
+  ...[0, 36, 72, 108, 144, 180, 216, 252, 288, 324].map((angle, i) => ({
     cx: 50 + 15 * Math.cos((angle * Math.PI) / 180),
     cy: 50 + 15 * Math.sin((angle * Math.PI) / 180),
-    r: 2.5,
+    r: 2.2,
     ring: 2,
     index: i,
   })),
@@ -27,29 +27,43 @@ const dotRings = [
 
 const ClearLogoAnimated = () => (
   <div className="flex flex-col items-center gap-6">
-    <div className="relative w-28 h-28">
+    <div className="relative w-28 h-28 clear-breathe">
       <svg viewBox="0 0 100 100" className="w-full h-full">
         <style>{`
           @keyframes spinRing0 {
             from { transform: rotate(0deg); }
-            to   { transform: rotate(360deg); }
+            to   { transform: rotate(180deg); }
           }
           @keyframes spinRing1 {
             from { transform: rotate(0deg); }
-            to   { transform: rotate(-360deg); }
+            to   { transform: rotate(-162deg); }
           }
           @keyframes spinRing2 {
             from { transform: rotate(0deg); }
-            to   { transform: rotate(360deg); }
+            to   { transform: rotate(144deg); }
           }
-          @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.7; }
-            50%      { transform: scale(1.15); opacity: 1; }
+          @keyframes breathe {
+            0%   { transform: scale(1); }
+            50%  { transform: scale(1.2); }
+            100% { transform: scale(1); }
           }
-          .ring0 { animation: spinRing0 6s linear infinite; transform-origin: 50px 50px; }
-          .ring1 { animation: spinRing1 4s linear infinite; transform-origin: 50px 50px; }
-          .ring2 { animation: spinRing2 3s linear infinite; transform-origin: 50px 50px; }
-          .dot   { animation: pulse 2s ease-in-out infinite; transform-origin: center; }
+          .ring0 {
+            animation: spinRing0 5s ease-out forwards;
+            transform-origin: 50px 50px;
+          }
+          .ring1 {
+            animation: spinRing1 4.5s ease-out forwards;
+            transform-origin: 50px 50px;
+          }
+          .ring2 {
+            animation: spinRing2 4s ease-out forwards;
+            transform-origin: 50px 50px;
+          }
+          .clear-breathe {
+            animation: breathe 1.2s ease-in-out 1;
+            animation-delay: 4s;
+            animation-fill-mode: both;
+          }
         `}</style>
 
         <g className="ring0">
@@ -60,8 +74,6 @@ const ClearLogoAnimated = () => (
               cy={d.cy}
               r={d.r}
               fill="#1a1a1a"
-              className="dot"
-              style={{ animationDelay: `${i * 0.1}s` }}
             />
           ))}
         </g>
@@ -73,8 +85,6 @@ const ClearLogoAnimated = () => (
               cy={d.cy}
               r={d.r}
               fill="#1a1a1a"
-              className="dot"
-              style={{ animationDelay: `${i * 0.15}s` }}
             />
           ))}
         </g>
@@ -86,8 +96,6 @@ const ClearLogoAnimated = () => (
               cy={d.cy}
               r={d.r}
               fill="#1a1a1a"
-              className="dot"
-              style={{ animationDelay: `${i * 0.2}s` }}
             />
           ))}
         </g>
